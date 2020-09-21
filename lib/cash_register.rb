@@ -9,23 +9,23 @@ class CashRegister
   end
 
   def add_item(item, price, quantity = 1)
-    @price = price
-    @total += price * quantity
+    self.price = price
+    self.total += price * quantity
     if quantity > 1
       counter = 0
       while counter < quantity
-        @items << item
+        self.items << item
         counter += 1
       end
     else
-      @items << item
+      self.items << item
     end
   end
 
   def apply_discount
-    if @discount > 0
-      @discount_amount = (price * discount)/100
-      @total -= @discount_amount
+    if self.discount > 0
+      self.discount_amount = (price * discount)/100
+      self.total -= self.discount_amount
       return "After the discount, the total comes to $#{total}."
     else
       return "There is no discount to apply."
@@ -33,8 +33,12 @@ class CashRegister
   end
 
   def void_last_transaction
+   if self.items.length > 0 
     self.total -= self.price
     self.total
+  else
+    self.total = 0 
+  end
   end
 
 end
